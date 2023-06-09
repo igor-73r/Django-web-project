@@ -1,18 +1,12 @@
-#FROM ubuntu:latest
-#LABEL authors="Игорь"
-#
-#ENTRYPOINT ["top", "-b"]
-#
+FROM python
 
-FROM python:3
+WORKDIR /django-project
 
-WORKDIR /usr/src/app
+COPY requirements.txt /django-project
+RUN pip install -r requirements.txt
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
+COPY . /django-project
 
 EXPOSE 8000
 
-CMD [ "python", "./manage.py", "runserver" ]
+CMD python ./WebProject/manage.py runserver
